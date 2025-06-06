@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  wmi:
+    image: ghcr.io/smartworkmcd/wmi:lastest
+    restart: always
+    ports:
+      - "8080:80"  # Expose WMI on port 8080 (adjust if needed)
+    labels:
+      io.balena.features.supervisor-api: '1'  # Needed for device info or 
+    depends_on:
+      - mqtt-broker
+    environment:
+      - BROKER_IP=mqtt-broker
+      - BROKER_PORT=1883
+      - BROKER_USER=${BROKER_USER}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+  
+  agg:
+    image: ghcr.io/smartworkmcd/aggregator:lastest
+    container_name: agg
+    restart: unless-stopped
+    depends_on:
+      - mqtt-broker
+    environment:
+      - BROKER_IP=mqtt-broker
+      - BROKER_PORT=1883
+      - BROKER_USER=${BROKER_USER}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+
+  neighbors:
+    image: ghcr.io/smartworkmcd/neighbors:lastest
+    container_name: neighbors
+    restart: unless-stopped
+    depends_on:
+      - mqtt-broker
+    environment:
+      - BROKER_IP=mqtt-broker
+      - BROKER_PORT=1883
+      - BROKER_USER=${BROKER_USER}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+    
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    restart: unless-stopped
+    ports:
+      - "${BROKER_PORT}:1883"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    environment:
+      - BROKER_USER=${BROKER_USER}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_PORT=${BROKER_PORT}
+    entrypoint: [ "sh", "-c", "
+      if [ ! -f /mosquitto/config/passwd ]; then \
+        touch /mosquitto/config/passwd && \
+        mosquitto_passwd -b /mosquitto/config/passwd \"$BROKER_USER\" \"$BROKER_PASSWORD\"; \
+      fi && \
+      mosquitto -c /mosquitto/config/mosquitto.conf"
+    ]
+    networks:
+      custom_net:
+
+networks:
+  custom_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24

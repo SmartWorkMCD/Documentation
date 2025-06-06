@@ -18,6 +18,8 @@ services:
       - "/dev/video0:/dev/video0"
     networks:
       custom_net:
+    
+  
 
 networks:
   custom_net:

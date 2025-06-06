@@ -57,7 +57,7 @@ services:
     entrypoint: [ "sh", "-c", "
       if [ ! -f /mosquitto/config/passwd ]; then \
         touch /mosquitto/config/passwd && \
-        mosquitto_passwd -b /mosquitto/config/passwd \"$BROKER_USER\" \"$BROKER_PASSWORD\"; \
+        mosquitto_passwd -b /mosquitto/config/passwd admin admin; \
       fi && \
       mosquitto -c /mosquitto/config/mosquitto.conf"
     ]

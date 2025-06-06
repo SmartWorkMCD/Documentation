@@ -13,8 +13,8 @@ services:
     environment:
       - BROKER_IP=mqtt-broker
       - BROKER_PORT=1883
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
   
   agg:
     image: ghcr.io/smartworkmcd/aggregator:lastest
@@ -25,8 +25,8 @@ services:
     environment:
       - BROKER_IP=mqtt-broker
       - BROKER_PORT=1883
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
 
   neighbors:
     image: ghcr.io/smartworkmcd/neighbors:lastest
@@ -37,8 +37,8 @@ services:
     environment:
       - BROKER_IP=mqtt-broker
       - BROKER_PORT=1883
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
     
   mqtt-broker:
     image: eclipse-mosquitto:latest
@@ -51,8 +51,8 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
     environment:
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
       - BROKER_PORT=${BROKER_PORT}
     entrypoint: [ "sh", "-c", "
       if [ ! -f /mosquitto/config/passwd ]; then \

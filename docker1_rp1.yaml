@@ -9,9 +9,9 @@ services:
       - mqtt-broker
     environment:
       - BROKER_IP=mqtt-broker
-      - BROKER_PORT=${BROKER_PORT}
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - BROKER_PORT=1883
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
       - CAMERA_ID=0
       - SHOW_SCREEN=False
     devices:

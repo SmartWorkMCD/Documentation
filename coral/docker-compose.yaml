@@ -11,8 +11,6 @@ services:
       - "8080:80"  # Expose projector on port 8080 (adjust if needed)
     labels:
       io.balena.features.supervisor-api: '1'  # Needed for device info or control
-    networks:
-      - custom_network
 
   objectdetection:
     image: ghcr.io/smartworkmcd/objectdetection:latest
@@ -25,10 +23,8 @@ services:
     environment:
       - BROKER_IP=mqtt-broker
       - BROKER_PORT=1883
-      - BROKER_USER=${BROKER_USER}
-      - BROKER_PASSWORD=${BROKER_PASSWORD}
-    networks:
-      - custom_network
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
 
   kiosk:
     build: ./kiosk
@@ -40,7 +36,3 @@ services:
       io.balena.features.firmware: '1'
       io.balena.features.kernel-modules: '1'
       io.balena.features.x11: '1'
-
-  networks:
-    custom_network:
-      driver: bridge

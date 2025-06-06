@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  objectdetection:
+    image: ghcr.io/smartworkmcd/objectdetection:latest
+    container_name: objectdetection
+    restart: unless-stopped
+    depends_on:
+      - mqtt-broker
+    devices:
+      - /dev/video0:/dev/video0
+    environment:
+      - BROKER_IP=mqtt-broker
+      - BROKER_PORT=1883
+      - BROKER_USER=${BROKER_USER}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+    networks:
+      custom_net:
+
+networks:
+  custom_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.69.0/24

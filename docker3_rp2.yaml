@@ -53,7 +53,7 @@ services:
     environment:
       - BROKER_USER=admin
       - BROKER_PASSWORD=admin
-      - BROKER_PORT=${BROKER_PORT}
+      - BROKER_PORT=1883
     entrypoint: [ "sh", "-c", "
       if [ ! -f /mosquitto/config/passwd ]; then \
         touch /mosquitto/config/passwd && \

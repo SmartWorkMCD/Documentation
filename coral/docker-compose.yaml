@@ -3,11 +3,16 @@ version: '3.8'
 services:
   projector:
     image: ghcr.io/smartworkmcd/projector:latest
-    restart: always
+    container_name: projector
+    restart: unless-stopped
+    depends_on:
+      - mqtt-broker
     ports:
       - "8080:80"  # Expose projector on port 8080 (adjust if needed)
     labels:
       io.balena.features.supervisor-api: '1'  # Needed for device info or control
+    networks:
+      - custom_network
 
   objectdetection:
     image: ghcr.io/smartworkmcd/objectdetection:latest
@@ -22,6 +27,8 @@ services:
       - BROKER_PORT=1883
       - BROKER_USER=${BROKER_USER}
       - BROKER_PASSWORD=${BROKER_PASSWORD}
+    networks:
+      - custom_network
 
   kiosk:
     build: ./kiosk

@@ -21,6 +21,8 @@ services:
       - BROKER_PORT={{BROKER_PORT}}
       - BROKER_USER={{BROKER_USER}}
       - BROKER_PASSWORD={{BROKER_PASSWORD}}
+    group_add:
+      - video
 
   kiosk:
     image: balenablocks/browser:latest

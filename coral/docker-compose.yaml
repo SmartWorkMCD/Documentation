@@ -1,7 +1,7 @@
 version: "2"
 services:
   projector:
-    image: ghcr.io/smartworkmcd/projector:latest
+    image: ghcr.io/smartworkmcd/projector:lastest
     container_name: projector
     ports:
       - "8080:80" 

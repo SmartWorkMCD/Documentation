@@ -5,6 +5,11 @@ services:
     container_name: projector
     ports:
       - "8080:80" 
+    environment:
+      - BROKER_IP={{BROKER_IP}}
+      - BROKER_PORT={{BROKER_PORT}}
+      - BROKER_USER={{BROKER_USER}}
+      - BROKER_PASSWORD={{BROKER_PASSWORD}}
 
   objectdetection:
     image: ghcr.io/smartworkmcd/objectdetection:latest
@@ -12,10 +17,10 @@ services:
     devices:
       - /dev/video0:/dev/video0
     environment:
-      - BROKER_IP=mqtt-broker
-      - BROKER_PORT=1883
-      - BROKER_USER=admin
-      - BROKER_PASSWORD=admin
+      - BROKER_IP={{BROKER_IP}}
+      - BROKER_PORT={{BROKER_PORT}}
+      - BROKER_USER={{BROKER_USER}}
+      - BROKER_PASSWORD={{BROKER_PASSWORD}}
 
   kiosk:
     image: balenablocks/browser:latest

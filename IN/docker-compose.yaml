@@ -5,10 +5,8 @@ services:
     image: ghcr.io/smartworkmcd/handtracking:latest
     container_name: hand-tracking
     restart: unless-stopped
-    depends_on:
-      - mqtt-broker
     environment:
-      - BROKER_IP=mqtt-broker
+      - BROKER_IP={{BROKER_IP}}
       - BROKER_PORT=1883
       - BROKER_USER=admin
       - BROKER_PASSWORD=admin

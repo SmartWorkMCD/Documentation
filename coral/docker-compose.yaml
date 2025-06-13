@@ -4,7 +4,7 @@ services:
     image: ghcr.io/smartworkmcd/projector:lastest
     container_name: projector
     ports:
-      - "8080:80" 
+      - "8000:8000"
     environment:
       - BROKER_IP={{BROKER_IP}}
       - BROKER_PORT={{BROKER_PORT}}
@@ -28,7 +28,7 @@ services:
     image: balenablocks/browser:latest
     container_name: kiosk
     environment:
-      - BROWSER_URL=http://projector:8080
+      - BROWSER_URL=http://projector:8000
       - BROWSER_FULLSCREEN=true
       - BROWSER_DISABLE_NAVIGATION=true
       - KIOSK=true

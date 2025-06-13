@@ -14,21 +14,20 @@ services:
   objectdetection:
     image: ghcr.io/smartworkmcd/objectdetection:latest
     container_name: objectdetection
-    devices:
-      - /dev/video0:/dev/video0
+    privileged: true
     environment:
       - BROKER_IP={{BROKER_IP}}
       - BROKER_PORT={{BROKER_PORT}}
       - BROKER_USER={{BROKER_USER}}
       - BROKER_PASSWORD={{BROKER_PASSWORD}}
-    group_add:
-      - video
+    # command: "while true; do sleep 1000; done"
 
   kiosk:
     image: balenablocks/browser:latest
     container_name: kiosk
+    privileged: true
     environment:
-      - BROWSER_URL=http://projector:8000
+      - LAUNCH_URL=http://projector:8000 # <--- CHANGE THIS LINE
       - BROWSER_FULLSCREEN=true
       - BROWSER_DISABLE_NAVIGATION=true
       - KIOSK=true

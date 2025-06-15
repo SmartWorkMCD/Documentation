@@ -15,6 +15,8 @@ services:
     image: ghcr.io/smartworkmcd/objectdetection:latest
     container_name: objectdetection
     privileged: true
+    devices:
+      - "/dev/video0:/dev/video0"
     environment:
       - BROKER_IP={{BROKER_IP}}
       - BROKER_PORT=1883

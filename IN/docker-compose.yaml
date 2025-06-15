@@ -14,3 +14,16 @@ services:
       - SHOW_SCREEN=False
     devices:
       - "/dev/video0:/dev/video0"
+  
+  workstation_brain:    
+    image: ghcr.io/smartworkmcd/workstationbrain:latest
+    container_name: workstation-brain
+    restart: unless-stopped
+    depends_on:
+      - mqtt-broker
+      - hand_tracking
+    environment:
+      - BROKER_IP=mqtt-broker
+      - BROKER_PORT=1883
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin

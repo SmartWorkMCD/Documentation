@@ -1,5 +1,7 @@
 # Documentation
 
+**ATENÇÃO ATENÇÃO:** REVER TODOS OS IPS E ISSO
+
 ## IN
 
 (já têm todos .env a redirecionar para o respetivo OUT)
@@ -18,9 +20,9 @@ r5:
 
 r2: 172.31.1.114 (sem cam) (ditador)
 
-r4: 172.31.1.110 (sem cam)
+r4: 172.31.1.11~~0~~1 (sem cam)
 
-r6: 172.31.1.111 (sem cam)
+r6: 172.31.1.11~~1~~0 (sem cam)
 
 
 # WORKSTATIONS

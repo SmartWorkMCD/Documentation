@@ -27,3 +27,29 @@ services:
       - BROKER_PORT=1883
       - BROKER_USER=admin
       - BROKER_PASSWORD=admin
+
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    environment:
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
+      - BROKER_PORT=1883
+    entrypoint: [ "sh", "-c", "
+      if [ ! -f /mosquitto/config/passwd ]; then \
+        touch /mosquitto/config/passwd && \
+        mosquitto_passwd -b /mosquitto/config/passwd admin admin; \
+      fi && \
+      if [ ! -f /mosquitto/config/mosquitto.conf ]; then \
+        echo 'listener 1883' > /mosquitto/config/mosquitto.conf && \
+        echo 'password_file /mosquitto/config/passwd' >> /mosquitto/config/mosquitto.conf; \
+      fi && \
+      mosquitto -c /mosquitto/config/mosquitto.conf"
+    ]

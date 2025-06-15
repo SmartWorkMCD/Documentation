@@ -1,6 +1,10 @@
 # Documentation
 
+## IN
+
 r1: 172.31.1.116
+
+## OUT
 
 r2: 172.31.1.114 (sem cam) (ditador)
 

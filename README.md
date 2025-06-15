@@ -2,7 +2,13 @@
 
 ## IN
 
+(já têm todos .env a redirecionar para o respetivo OUT)
+
 r1: 172.31.1.116
+
+r3:
+
+r5:
 
 ## OUT
 

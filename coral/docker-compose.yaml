@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - BROKER_IP={{BROKER_IP}}
+      - BROKER_IP=${BROKER_IP}
       - BROKER_PORT=1883
       - BROKER_USER=admin
       - BROKER_PASSWORD=admin
@@ -18,7 +18,7 @@ services:
     devices:
       - "/dev/video0:/dev/video0"
     environment:
-      - BROKER_IP={{BROKER_IP}}
+      - BROKER_IP=${BROKER_IP}
       - BROKER_PORT=1883
       - BROKER_USER=admin
       - BROKER_PASSWORD=admin

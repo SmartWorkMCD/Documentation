@@ -7,9 +7,9 @@ services:
       - "8000:8000"
     environment:
       - BROKER_IP={{BROKER_IP}}
-      - BROKER_PORT={{BROKER_PORT}}
-      - BROKER_USER={{BROKER_USER}}
-      - BROKER_PASSWORD={{BROKER_PASSWORD}}
+      - BROKER_PORT=1883
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
 
   objectdetection:
     image: ghcr.io/smartworkmcd/objectdetection:latest
@@ -17,9 +17,9 @@ services:
     privileged: true
     environment:
       - BROKER_IP={{BROKER_IP}}
-      - BROKER_PORT={{BROKER_PORT}}
-      - BROKER_USER={{BROKER_USER}}
-      - BROKER_PASSWORD={{BROKER_PASSWORD}}
+      - BROKER_PORT=1883
+      - BROKER_USER=admin
+      - BROKER_PASSWORD=admin
     # command: "while true; do sleep 1000; done"
 
   kiosk:
